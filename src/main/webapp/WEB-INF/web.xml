@@ -1,0 +1,35 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+
+	<filter>
+		<filter-name>Logging</filter-name>
+		<filter-class>by.grodno.pvt.site.webappsample.filter.LoggingFilter</filter-class>
+		<init-param>
+			<param-name>active</param-name>
+			<param-value>TRUE</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Logging</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>by.grodno.pvt.site.webappsample.ServletSample</servlet-class>
+		<init-param>
+			<param-name>env</param-name>
+			<param-value>Development</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+</web-app>
