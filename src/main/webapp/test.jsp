@@ -1,10 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <body>
+
+
 	<jsp:useBean id="obj"
 		class="by.grodno.pvt.site.webappsample.OurTestJavaBean">
 		<jsp:setProperty name="obj" property="value" value="VALUE" />
 	</jsp:useBean>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 
 	<%@ include file="fragments/header.jsp"%>
 
@@ -30,11 +34,10 @@
 	<br />
 
 
-	<c:out value="${requestScope.data.value}" />
+	<c:out value="${sessionScope.data1}" />
 
-	<c:set var="salary" scope="session" value="${100 * sessionScope.counter}" />
 
-	<c:out value="${sessionScope.salary}" />
+	<с:set var="salary" scope="session" value="100" />
 
 	
 

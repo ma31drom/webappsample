@@ -1,21 +1,21 @@
 package by.grodno.pvt.site.webappsample;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "HelloServlet2", urlPatterns = { "/" })
-public class ServletSample2 extends HttpServlet {
+public class HomePageServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter writer = resp.getWriter();
-		writer.print("!!!!!!!!!!    IM INCLUDED PART   !!!!!!!!!!!!!");
+		OurTestJavaBean o = new OurTestJavaBean();
+		o.setValue("Something from real servlet");
+		req.getSession().setAttribute("data1", "Something from real servlet");
+
+		getServletContext().getRequestDispatcher("/test.jsp").forward(req, resp);
 	}
 
 }
