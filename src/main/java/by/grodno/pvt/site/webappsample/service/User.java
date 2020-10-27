@@ -10,6 +10,9 @@ public class User {
 	private Date birthdate;
 	private boolean male;
 
+	private Integer department;
+	private Double salary;
+
 	public User(Integer id, String firstMame, String lastName, Date birthdate, boolean male) {
 		super();
 		this.id = id;
@@ -57,6 +60,22 @@ public class User {
 
 	public void setMale(boolean male) {
 		this.male = male;
+	}
+
+	public Integer getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Integer department) {
+		this.department = department;
+	}
+
+	public Double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
 	}
 
 }
