@@ -83,32 +83,24 @@ public class UserService {
 	};
 
 	public void addUser(User user) {
-		try (Connection conn = DBUtils.getConnetion(); PreparedStatement stmt = conn.prepareStatement(SQL.INSERT)) {
+		try (Connection conn = DBUtils.getConnetion();
+				PreparedStatement stmt = conn.prepareStatement(SQL.INSERT, Statement.RETURN_GENERATED_KEYS)) {
+
 			stmt.setString(1, user.getFirstName());
 			stmt.setString(2, user.getLastName());
 			stmt.setDouble(3, user.getSalary());
 			stmt.setTimestamp(4,
 					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(user.getBirthdate())));
 			stmt.setBoolean(5, user.isMale());
-			stmt.execute();
+
+			stmt.executeUpdate();
+
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			generatedKeys.next();
+			LOGGER.info("User created with id: " + generatedKeys.getLong(1));
 
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
-		}
-		;
-		// users.add(user);
-	}
-
-	private User getUser(int i, String string, String string2, Date fromString, boolean male) {
-		return new User(i, string, string2, fromString, male);
-	}
-
-	private Date fromString(String date) {
-		try {
-			return new SimpleDateFormat("yyyy-MM-dd").parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return null;
 		}
 	}
 
