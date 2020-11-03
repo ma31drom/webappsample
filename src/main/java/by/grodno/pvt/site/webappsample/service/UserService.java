@@ -6,19 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.apache.log4j.Logger;
 
-import by.grodno.pvt.site.webappsample.filter.LoggingFilter;
+import by.grodno.pvt.site.webappsample.model.User;
 
-public class UserService {
+public class UserService implements UserRepository {
 
 	private static UserService userService;
 
@@ -27,13 +24,14 @@ public class UserService {
 	private UserService() {
 	}
 
-	public static UserService getService() {
+	public static UserRepository getService() {
 		if (userService == null) {
 			userService = new UserService();
 		}
 		return userService;
 	}
 
+	@Override
 	public List<User> getUsers() {
 		List<User> result = new ArrayList<User>();
 		try (Connection conn = DBUtils.getConnetion(); Statement stmt = conn.createStatement()) {
@@ -58,16 +56,13 @@ public class UserService {
 		Integer id = rs.getInt(1);
 		String fName = rs.getString(2);
 		String lName = rs.getString(6);
-		Integer dept = rs.getInt(3) == 0 ? null : rs.getInt(3);
-		Double sal = rs.getDouble(4);
 		Date date = rs.getTimestamp(5);
 		Boolean male = rs.getBoolean(7);
 		User user = new User(id, fName, lName, date, male);
-		user.setSalary(sal);
-		user.setDepartment(dept);
 		return user;
 	};
 
+	@Override
 	public void deleteUser(Integer number) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.DELETE_BY_ID)) {
@@ -82,13 +77,13 @@ public class UserService {
 
 	};
 
+	@Override
 	public void addUser(User user) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
 			stmt.setString(1, user.getFirstName());
 			stmt.setString(2, user.getLastName());
-			stmt.setDouble(3, user.getSalary());
 			stmt.setTimestamp(4,
 					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(user.getBirthdate())));
 			stmt.setBoolean(5, user.isMale());

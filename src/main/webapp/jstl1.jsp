@@ -1,4 +1,4 @@
-<%@page import="by.grodno.pvt.site.webappsample.service.User"%>
+<%@page import="by.grodno.pvt.site.webappsample.model.User"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <html>
@@ -24,7 +24,6 @@
 					<th scope="col">Lastname</th>
 					<th scope="col">Birthdate</th>
 					<th scope="col">Sex</th>
-					<th scope="col">Salary</th>
 					<th scope="col">Actions</th>
 				</tr>
 			</thead>
@@ -47,7 +46,6 @@
 							<c:when test="${requestScope.currUser.male}">Male</c:when>
 							<c:otherwise>Female</c:otherwise>
 						</c:choose></td>
-					<td>${requestScope.currUser.salary}</td>
 					<td><a class="btn btn-danger"
 						href="http://localhost/webappsample/user/delete?number=${i}">Delete
 							user</a></td>

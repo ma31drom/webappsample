@@ -12,8 +12,7 @@
          <input type="radio" id="male" name="male" value="true">
 			<label for="male">Male</label><br>
 		 <input type="radio" id="female" name="male" value="false">
-			<label for="female">Female</label><br>
-         Salary: <input type = "text" name = "salary" />
+			<label for="female">Female</label>
          <br />
          <input type = "submit" value = "Submit" />
       </form>
