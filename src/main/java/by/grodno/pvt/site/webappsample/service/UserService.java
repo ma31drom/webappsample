@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import by.grodno.pvt.site.webappsample.model.User;
+import by.grodno.pvt.site.webappsample.model.OldUser;
 
 public class UserService implements UserRepository {
 
@@ -32,14 +32,14 @@ public class UserService implements UserRepository {
 	}
 
 	@Override
-	public List<User> getUsers() {
-		List<User> result = new ArrayList<User>();
+	public List<OldUser> getUsers() {
+		List<OldUser> result = new ArrayList<OldUser>();
 		try (Connection conn = DBUtils.getConnetion(); Statement stmt = conn.createStatement()) {
 			ResultSet rs = stmt.executeQuery(SQL.SELECT_ALL);
 
 			while (rs.next()) {
 
-				User user = mapRawToUser(rs);
+				OldUser user = mapRawToUser(rs);
 
 				result.add(user);
 			}
@@ -52,13 +52,13 @@ public class UserService implements UserRepository {
 		return result;
 	}
 
-	private User mapRawToUser(ResultSet rs) throws SQLException {
+	private OldUser mapRawToUser(ResultSet rs) throws SQLException {
 		Integer id = rs.getInt(1);
 		String fName = rs.getString(2);
 		String lName = rs.getString(6);
 		Date date = rs.getTimestamp(5);
 		Boolean male = rs.getBoolean(7);
-		User user = new User(id, fName, lName, date, male);
+		OldUser user = new OldUser(id, fName, lName, date, male);
 		return user;
 	};
 
@@ -78,7 +78,7 @@ public class UserService implements UserRepository {
 	};
 
 	@Override
-	public void addUser(User user) {
+	public void addUser(OldUser user) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.INSERT, Statement.RETURN_GENERATED_KEYS)) {
 

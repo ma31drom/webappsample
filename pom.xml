@@ -13,6 +13,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<hiber.version>5.4.23.Final</hiber.version>
+		<hiber-validator.version>6.1.6.Final</hiber-validator.version>
 	</properties>
 
 	<dependencies>
@@ -62,7 +63,12 @@
 			<version>${hiber.version}</version>
 		</dependency>
 
-		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hiber-validator.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

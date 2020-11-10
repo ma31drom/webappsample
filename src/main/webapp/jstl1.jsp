@@ -1,4 +1,4 @@
-<%@page import="by.grodno.pvt.site.webappsample.model.User"%>
+<%@page import="by.grodno.pvt.site.webappsample.model.OldUser"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <html>
@@ -36,10 +36,10 @@
 					<td>${requestScope.currUser.lastName}</td>
 					<td>
 						<%
-							Date userBirth = ((User) request.getAttribute("currUser")).getBirthdate();
-									if (userBirth != null) {
-										out.println(new SimpleDateFormat("yyyy-MM-dd").format(userBirth));
-									}
+							Date userBirth = ((OldUser) request.getAttribute("currUser")).getBirthdate();
+																	if (userBirth != null) {
+																		out.println(new SimpleDateFormat("yyyy-MM-dd").format(userBirth));
+																	}
 						%>
 					</td>
 					<td><c:choose>

@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
 
-import by.grodno.pvt.site.webappsample.model.User;
+import by.grodno.pvt.site.webappsample.model.OldUser;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +25,7 @@ public class HibernateUserService implements UserRepository {
 	}
 
 	@Override
-	public void addUser(User user) {
+	public void addUser(OldUser user) {
 		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
 
 		entityManager.getTransaction().begin();
@@ -35,15 +35,15 @@ public class HibernateUserService implements UserRepository {
 	}
 
 	@Override
-	public List<User> getUsers() {
+	public List<OldUser> getUsers() {
 
 		EntityManager entityManager = HibernateUtil.getEntityManager().createEntityManager();
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
-		CriteriaQuery<User> cr = cb.createQuery(User.class);
+		CriteriaQuery<OldUser> cr = cb.createQuery(OldUser.class);
 
-		return entityManager.createQuery(cr.select(cr.from(User.class))).getResultList();
+		return entityManager.createQuery(cr.select(cr.from(OldUser.class))).getResultList();
 
 	}
 
@@ -53,7 +53,7 @@ public class HibernateUserService implements UserRepository {
 		EntityManager entityManager = HibernateUtil.getEntityManager().createEntityManager();
 
 		entityManager.getTransaction().begin();
-		entityManager.remove(new User(number, null, null, null, false));
+		entityManager.remove(new OldUser(number, null, null, null, false));
 		entityManager.getTransaction().commit();
 
 	}
