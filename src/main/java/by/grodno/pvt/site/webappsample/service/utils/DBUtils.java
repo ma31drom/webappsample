@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample.service;
+package by.grodno.pvt.site.webappsample.service.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

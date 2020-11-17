@@ -17,9 +17,9 @@ import by.grodno.pvt.site.webappsample.domain.Credentials;
 import by.grodno.pvt.site.webappsample.domain.Role;
 import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.model.OldUser;
-import by.grodno.pvt.site.webappsample.service.HibernateUserService;
-import by.grodno.pvt.site.webappsample.service.HibernateUtil;
 import by.grodno.pvt.site.webappsample.service.UserRepository;
+import by.grodno.pvt.site.webappsample.service.impl.HibernateUserService;
+import by.grodno.pvt.site.webappsample.service.utils.SessionProvider;
 
 public class JstlServlet1 extends HttpServlet {
 
@@ -29,19 +29,19 @@ public class JstlServlet1 extends HttpServlet {
 		save();
 		
 		
-		UserRepository service = HibernateUserService.getService();
+		//UserRepository service = HibernateUserService.getService();
 
-		List<OldUser> users = service.getUsers();
+		//List<OldUser> users = service.getUsers();
 
-		req.setAttribute("users", users);
+		//req.setAttribute("users", users);
 
 		getServletContext().getRequestDispatcher("/jstl1.jsp").forward(req, resp);
 	}
 
 	private void save() {
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
+		//Session entityManager = SessionProvider.getEntityManager().getCurrentSession();
 
-		entityManager.getTransaction().begin();
+		//entityManager.getTransaction().begin();
 		
 		
 		Credentials creds1 = new Credentials();
@@ -49,13 +49,13 @@ public class JstlServlet1 extends HttpServlet {
 		creds1.setCreateDate(new Date());
 		creds1.setPassword("SomePass");
 		
-		entityManager.persist(creds1);
+		//entityManager.persist(creds1);
 
 		Credentials creds2 = new Credentials();
 		creds2.setActive(false);
 		creds2.setCreateDate(new Date());
 		creds2.setPassword("SomePass");
-		entityManager.persist(creds2);
+		//entityManager.persist(creds2);
 		
 			
 		User user = new User();
@@ -69,15 +69,15 @@ public class JstlServlet1 extends HttpServlet {
 		arrayList.add(creds2);
 		
 		user.setCredentials(arrayList);
-		entityManager.persist(user);
+		//entityManager.persist(user);
 		
 		creds1.setOwnerUser(user);
 		creds2.setOwnerUser(user);
 		
-		entityManager.persist(creds1);
-		entityManager.persist(creds2);
+		//entityManager.persist(creds1);
+		//entityManager.persist(creds2);
 		
-		entityManager.getTransaction().commit();
+		//entityManager.getTransaction().commit();
 		
 	}
 

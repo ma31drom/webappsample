@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.grodno.pvt.site.webappsample.model.OldUser;
-import by.grodno.pvt.site.webappsample.service.HibernateUserService;
-import by.grodno.pvt.site.webappsample.service.UserService;
+import by.grodno.pvt.site.webappsample.service.impl.HibernateUserService;
+import by.grodno.pvt.site.webappsample.service.impl.UserService;
 
 public class JstlServlet2 extends HttpServlet {
 
@@ -25,7 +25,7 @@ public class JstlServlet2 extends HttpServlet {
 					             new SimpleDateFormat("yyy-MM-dd")
 					                 .parse(req.getParameter("birthdate")),
 					             Boolean.valueOf(req.getParameter("male")));
-			HibernateUserService.getService().addUser(user);
+			//HibernateUserService.getService().addUser(user);
 
 		} catch (ParseException e) {
 			e.printStackTrace();

@@ -17,56 +17,57 @@ import org.junit.Test;
 import by.grodno.pvt.site.webappsample.domain.Credentials;
 import by.grodno.pvt.site.webappsample.domain.Role;
 import by.grodno.pvt.site.webappsample.domain.User;
+import by.grodno.pvt.site.webappsample.service.utils.SessionProvider;
 
 public class SampleOfHqjJpql {
 
 	@Test
 	public void testHql() {
 
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
-
-		entityManager.getTransaction().begin();
-
-		Credentials creds1 = new Credentials();
-		creds1.setActive(true);
-		creds1.setCreateDate(new Date());
-		creds1.setPassword("SomePass");
-
-		entityManager.persist(creds1);
-
-		Credentials creds2 = new Credentials();
-		creds2.setActive(false);
-		creds2.setCreateDate(new Date());
-		creds2.setPassword("SomePass");
-		entityManager.persist(creds2);
-
-		User user = new User();
-		user.setEmail("bla1@bla.bla");
-		user.setLastName("adgha");
-		user.setLogin("12345678");
-		user.setRole(Role.STUDENT);
-
-		ArrayList<Credentials> arrayList = new ArrayList<Credentials>();
-		arrayList.add(creds1);
-		arrayList.add(creds2);
-
-		user.setCredentials(arrayList);
-		entityManager.persist(user);
-
-		creds1.setOwnerUser(user);
-		creds2.setOwnerUser(user);
-
-		entityManager.persist(creds1);
-		entityManager.persist(creds2);
-
-		entityManager.getTransaction().commit();
+//		Session entityManager = SessionProvider.getEntityManager().getCurrentSession();
+//
+//		entityManager.getTransaction().begin();
+//
+//		Credentials creds1 = new Credentials();
+//		creds1.setActive(true);
+//		creds1.setCreateDate(new Date());
+//		creds1.setPassword("SomePass");
+//
+//		entityManager.persist(creds1);
+//
+//		Credentials creds2 = new Credentials();
+//		creds2.setActive(false);
+//		creds2.setCreateDate(new Date());
+//		creds2.setPassword("SomePass");
+//		entityManager.persist(creds2);
+//
+//		User user = new User();
+//		user.setEmail("bla1@bla.bla");
+//		user.setLastName("adgha");
+//		user.setLogin("12345678");
+//		user.setRole(Role.STUDENT);
+//
+//		ArrayList<Credentials> arrayList = new ArrayList<Credentials>();
+//		arrayList.add(creds1);
+//		arrayList.add(creds2);
+//
+//		user.setCredentials(arrayList);
+//		entityManager.persist(user);
+//
+//		creds1.setOwnerUser(user);
+//		creds2.setOwnerUser(user);
+//
+//		entityManager.persist(creds1);
+//		entityManager.persist(creds2);
+//
+//		entityManager.getTransaction().commit();
 
 	}
 
 	@Test
 	public void getFilteringByRole() {
-
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
+/*
+		Session entityManager = SessionProvider.getEntityManager().getCurrentSession();
 
 		entityManager.getTransaction().begin();
 
@@ -76,12 +77,13 @@ public class SampleOfHqjJpql {
 		createQuery.getResultList().forEach(System.out::println);
 
 		entityManager.getTransaction().commit();
+		*/
 	}
 
 	@Test
 	public void getFilteringJoin() {
-
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
+/*
+		Session entityManager = SessionProvider.getEntityManager().getCurrentSession();
 
 		entityManager.getTransaction().begin();
 
@@ -92,12 +94,13 @@ public class SampleOfHqjJpql {
 		resultList.forEach(System.out::println);
 
 		entityManager.getTransaction().commit();
+		*/
 	}
 
 	@Test
 	public void getFilteringJoinWithJpaCriteria() {
-
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
+/*
+		Session entityManager = SessionProvider.getEntityManager().getCurrentSession();
 
 		entityManager.getTransaction().begin();
 
@@ -112,12 +115,13 @@ public class SampleOfHqjJpql {
 		List<User> resultList = entityManager.createQuery(where).getResultList();
 		resultList.forEach(System.out::println);
 		entityManager.getTransaction().commit();
+		*/
 	}
 
 	@Test
 	public void getFilteringJoinCriteria() {
-
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
+/*
+		Session entityManager = SessionProvider.getEntityManager().getCurrentSession();
 
 		entityManager.getTransaction().begin();
 
@@ -134,6 +138,7 @@ public class SampleOfHqjJpql {
 		resultList.forEach(System.out::println);
 
 		entityManager.getTransaction().commit();
+	*/
 	}
 
 }

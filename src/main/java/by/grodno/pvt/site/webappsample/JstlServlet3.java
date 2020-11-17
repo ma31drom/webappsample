@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.grodno.pvt.site.webappsample.service.HibernateUserService;
+import by.grodno.pvt.site.webappsample.service.impl.HibernateUserService;
 
 public class JstlServlet3 extends HttpServlet {
 
@@ -15,7 +15,7 @@ public class JstlServlet3 extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String parameter = req.getParameter("number");
 
-		HibernateUserService.getService().deleteUser(Integer.valueOf(parameter));
+		//HibernateUserService.getService().deleteUser(Integer.valueOf(parameter));
 
 		resp.sendRedirect("/webappsample/jstl1");
 	}

@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample.service;
+package by.grodno.pvt.site.webappsample.service.impl;
 
 import java.util.List;
 
@@ -9,24 +9,18 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
 import by.grodno.pvt.site.webappsample.model.OldUser;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import by.grodno.pvt.site.webappsample.service.ISessionProvider;
+import by.grodno.pvt.site.webappsample.service.UserRepository;
+import lombok.AllArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class HibernateUserService implements UserRepository {
 
-	private static UserRepository userService;
-
-	public static UserRepository getService() {
-		if (userService == null) {
-			userService = new HibernateUserService();
-		}
-		return userService;
-	}
+	private ISessionProvider sessionProvider;
 
 	@Override
 	public void addUser(OldUser user) {
-		Session entityManager = HibernateUtil.getEntityManager().getCurrentSession();
+		Session entityManager = sessionProvider.getEntityManager().getCurrentSession();
 
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
@@ -37,7 +31,7 @@ public class HibernateUserService implements UserRepository {
 	@Override
 	public List<OldUser> getUsers() {
 
-		EntityManager entityManager = HibernateUtil.getEntityManager().createEntityManager();
+		EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
@@ -50,7 +44,7 @@ public class HibernateUserService implements UserRepository {
 	@Override
 	public void deleteUser(Integer number) {
 
-		EntityManager entityManager = HibernateUtil.getEntityManager().createEntityManager();
+		EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
 		entityManager.getTransaction().begin();
 		entityManager.remove(new OldUser(number, null, null, null, false));

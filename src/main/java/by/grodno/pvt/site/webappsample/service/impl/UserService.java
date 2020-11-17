@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample.service;
+package by.grodno.pvt.site.webappsample.service.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,22 +14,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import by.grodno.pvt.site.webappsample.model.OldUser;
+import by.grodno.pvt.site.webappsample.service.UserRepository;
+import by.grodno.pvt.site.webappsample.service.utils.DBUtils;
+import by.grodno.pvt.site.webappsample.service.utils.SQL;
 
 public class UserService implements UserRepository {
 
-	private static UserService userService;
-
 	public static final Logger LOGGER = Logger.getLogger(UserService.class);
-
-	private UserService() {
-	}
-
-	public static UserRepository getService() {
-		if (userService == null) {
-			userService = new UserService();
-		}
-		return userService;
-	}
 
 	@Override
 	public List<OldUser> getUsers() {

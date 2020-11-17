@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-import by.grodno.pvt.site.webappsample.service.UserService;
+import by.grodno.pvt.site.webappsample.service.impl.UserService;
 
 public class LoggingFilter implements Filter {
 
