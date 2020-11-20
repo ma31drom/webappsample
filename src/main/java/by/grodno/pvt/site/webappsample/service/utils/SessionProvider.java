@@ -7,11 +7,13 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
 
 import by.grodno.pvt.site.webappsample.service.ISessionProvider;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
+@Component
 public class SessionProvider implements ISessionProvider, InitializingBean, DisposableBean {
 
 	private StandardServiceRegistry registry;
