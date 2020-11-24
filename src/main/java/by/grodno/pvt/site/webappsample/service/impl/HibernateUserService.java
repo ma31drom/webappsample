@@ -7,23 +7,19 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import by.grodno.pvt.site.webappsample.model.OldUser;
 import by.grodno.pvt.site.webappsample.service.ISessionProvider;
 import by.grodno.pvt.site.webappsample.service.UserRepository;
 
-@Component
 public class HibernateUserService implements UserRepository {
 
-	@Autowired
 	private ISessionProvider sessionProvider;
 
 	public HibernateUserService(ISessionProvider sessionProvider) {
 		this.sessionProvider = sessionProvider;
 	}
-	
+
 	@Override
 	public void addUser(OldUser user) {
 		Session entityManager = sessionProvider.getEntityManager().getCurrentSession();

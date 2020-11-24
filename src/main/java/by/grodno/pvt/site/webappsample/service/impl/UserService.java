@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import by.grodno.pvt.site.webappsample.model.OldUser;
@@ -21,7 +20,6 @@ import by.grodno.pvt.site.webappsample.service.utils.DBUtils;
 import by.grodno.pvt.site.webappsample.service.utils.SQL;
 
 @Component
-@Primary
 public class UserService implements UserRepository {
 
 	public static final Logger LOGGER = Logger.getLogger(UserService.class);
