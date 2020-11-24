@@ -7,11 +7,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Service;
 
-import by.grodno.pvt.site.webappsample.model.OldUser;
+import by.grodno.pvt.site.webappsample.domain.OldUser;
 import by.grodno.pvt.site.webappsample.service.ISessionProvider;
 import by.grodno.pvt.site.webappsample.service.UserRepository;
 
+@Service
 public class HibernateUserService implements UserRepository {
 
 	private ISessionProvider sessionProvider;

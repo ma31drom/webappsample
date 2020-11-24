@@ -1,20 +1,12 @@
 package by.grodno.pvt.site.webappsample;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import by.grodno.pvt.site.webappsample.config.ContextConfig;
-import by.grodno.pvt.site.webappsample.service.ReportingService;
-
+@SpringBootApplication
 public class Starter {
 
 	public static void main(String[] args) {
-
-		AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(ContextConfig.class);
-
-		ReportingService bean1 = container.getBean(ReportingService.class);
-
-		System.out.println(bean1.getAllUsersCount());
-
-		container.close();
+		SpringApplication.run(Starter.class, args);
 	}
 }

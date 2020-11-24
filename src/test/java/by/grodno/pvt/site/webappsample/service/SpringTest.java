@@ -1,7 +1,6 @@
 package by.grodno.pvt.site.webappsample.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 
@@ -12,11 +11,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import by.grodno.pvt.site.webappsample.config.ContextConfig;
-import by.grodno.pvt.site.webappsample.model.OldUser;
+import by.grodno.pvt.site.webappsample.domain.OldUser;
 
-@ContextConfiguration(classes = ContextConfig.class)
+@ContextConfiguration(classes = SpringTest.ContextConfig.class)
 public class SpringTest extends AbstractJUnit4SpringContextTests {
+
+	@Configuration
+	@ComponentScan("by.grodno.pvt.site.webappsample.service")
+	public class ContextConfig {
+
+	}
 
 	@Autowired
 	ReportingService service;
@@ -29,10 +33,11 @@ public class SpringTest extends AbstractJUnit4SpringContextTests {
 		// GIVEN
 		repo.addUser(new OldUser(null, "fname", "lname", new Date(), true));
 
-		//WHEN
+		// WHEN
 		Integer allUsersCount = service.getAllUsersCount();
-		
-	    //THEN 
+
+		// THEN
 		assertEquals(1, allUsersCount.intValue());
 	}
+
 }

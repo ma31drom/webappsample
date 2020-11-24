@@ -14,20 +14,29 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<hiber.version>5.4.23.Final</hiber.version>
 		<hiber-validator.version>6.1.6.Final</hiber-validator.version>
-		<org.springframework.version>5.2.8.RELEASE</org.springframework.version>
 	</properties>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.5.RELEASE</version>
+	</parent>
 
 	<dependencies>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${org.springframework.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -83,22 +92,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<url>http://localhost:80/manager/text</url>
-					<server>TomcatServer</server>
-					<path>/webappsample</path>
-				</configuration>
-			</plugin>
-		</plugins>
-		<finalName>webappsample</finalName>
-	</build>
-
 
 </project>

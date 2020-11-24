@@ -1,4 +1,4 @@
-<%@page import="by.grodno.pvt.site.webappsample.model.OldUser"%>
+<%@page import="by.grodno.pvt.site.webappsample.domain.OldUser"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <html>
