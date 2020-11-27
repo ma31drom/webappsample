@@ -2,14 +2,18 @@ package by.grodno.pvt.site.webappsample.config;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Configuration
 @EnableConfigurationProperties({ DataSourceProperties.class, HibernateProperties.class })
@@ -18,14 +22,14 @@ public class JPAConfiguration {
 	@Bean
 	public DataSource dataSource(DataSourceProperties config) {
 		BasicDataSource singleConnectionDataSource = new BasicDataSource();
-		
+
 		singleConnectionDataSource.setDriverClassName(config.getDriverClassName());
 		singleConnectionDataSource.setUrl(config.getUrl());
 		singleConnectionDataSource.setUsername(config.getUser());
 		singleConnectionDataSource.setPassword(config.getPassword());
 		singleConnectionDataSource.setInitialSize(5);
 		singleConnectionDataSource.setMaxTotal(20);
-		
+
 		return singleConnectionDataSource;
 	}
 
@@ -46,4 +50,13 @@ public class JPAConfiguration {
 		return localContainerEntityManagerFactoryBean;
 	}
 
+	@Bean
+	public PlatformTransactionManager txManager(EntityManagerFactory emf) {
+		return new JpaTransactionManager(emf);
+	}
+
+	@Bean
+	public TransactionTemplate template(PlatformTransactionManager ptm) {
+		return new TransactionTemplate(ptm);
+	}
 }

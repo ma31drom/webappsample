@@ -19,7 +19,7 @@ public class UsersController {
 	private UserRepository repo;
 
 	@PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveUser(@RequestBody OldUser user) {
+	public void saveUser(@RequestBody List<OldUser> user) {
 		repo.addUser(user);
 	}
 

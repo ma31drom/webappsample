@@ -8,7 +8,7 @@ public interface UserRepository {
 
 	List<OldUser> getUsers();
 
-	void addUser(OldUser user);
+	void addUser(List<OldUser> user);
 
 	void deleteUser(Integer number);
 
