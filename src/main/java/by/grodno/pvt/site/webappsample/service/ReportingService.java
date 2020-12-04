@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class ReportingService {
 
 	@Autowired
-	private UserRepository jdbcUserService;
+	private UserService jdbcUserService;
 
 	public Integer getAllUsersCount() {
 		return jdbcUserService.getUsers().size();
