@@ -14,18 +14,36 @@
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
+				<th scope="col">Image</th>
 				<th scope="col">Id</th>
 				<th scope="col">Firstname</th>
 				<th scope="col">Lastname</th>
 				<th scope="col">Male</th>
+				<th scope="col">Upload img</th>
 			</tr>
 		</thead>
 
 		<tr th:each="user : ${users}">
+			<td><img th:src="@{/users/{uid}/img(uid=${user.id})}" width="100"
+				height="100" alt=""></td>
 			<td th:text="${user.id}" />
 			<td th:text="${user.firstName}" />
 			<td th:text="${user.lastName}" />
 			<td th:text="${user.male}" />
+			<td>
+				<form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${user.id})}">
+					<table>
+						<tr>
+							<td>File to upload:</td>
+							<td><input type="file" name="file" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Upload" /></td>
+						</tr>
+					</table>
+				</form>
+			</td>
 		</tr>
 	</table>
 </body>

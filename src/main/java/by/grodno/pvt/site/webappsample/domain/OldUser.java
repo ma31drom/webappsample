@@ -30,6 +30,8 @@ public class OldUser {
 
 	private Date birthdate;
 
+	private String avatarFileName;
+
 	@Column(name = "isMale")
 	private Boolean male;
 

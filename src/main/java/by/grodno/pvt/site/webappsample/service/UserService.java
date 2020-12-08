@@ -9,9 +9,13 @@ import by.grodno.pvt.site.webappsample.domain.OldUser;
 public interface UserService {
 
 	List<OldUser> getUsers();
-
+	
+	OldUser getUser(Integer id);
+	
 	void addUser(List<OldUser> user);
 
+	void saveUser(OldUser user);
+	
 	void deleteUser(Integer number);
 
 	List<OldUser> findByExample(OldUser userSample);
