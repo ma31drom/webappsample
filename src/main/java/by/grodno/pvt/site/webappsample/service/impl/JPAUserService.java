@@ -2,6 +2,7 @@ package by.grodno.pvt.site.webappsample.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,7 +18,7 @@ import by.grodno.pvt.site.webappsample.service.UserService;
 
 @Service
 @Transactional
-public class JPAUserService implements UserService {
+public class JPAUserService implements UserService, InitializingBean {
 
 	@Autowired
 	private UserRepo repo;
@@ -52,5 +53,15 @@ public class JPAUserService implements UserService {
 	@Override
 	public List<OldUser> findByFName(String fname) {
 		return repo.findByFirstName(fname);
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		OldUser oldUser = new OldUser(null, "Maxim", "Naumovich", null, true);
+		OldUser oldUser2 = new OldUser(null, "Sasha", "Siaroga", null, true);
+		OldUser oldUser3 = new OldUser(null, "Siaroga", "Sasha", null, true);
+		repo.save(oldUser);
+		repo.save(oldUser2);
+		repo.save(oldUser3);
 	}
 }
