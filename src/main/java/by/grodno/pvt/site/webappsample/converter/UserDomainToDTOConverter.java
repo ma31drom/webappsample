@@ -3,20 +3,24 @@ package by.grodno.pvt.site.webappsample.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import by.grodno.pvt.site.webappsample.domain.OldUser;
 import by.grodno.pvt.site.webappsample.dto.UserDTO;
 
 @Component
 public class UserDomainToDTOConverter implements Converter<OldUser, UserDTO> {
 
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+
 	@Override
 	public UserDTO convert(OldUser source) {
-		UserDTO userDto = new UserDTO();
-		userDto.setId(source.getId());
-		userDto.setFirstName(source.getFirstName());
-		userDto.setLastName(source.getLastName());
-		userDto.setMale(source.getMale());
-		return userDto;
+		
+		MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
+		MAPPER.setSerializationInclusion(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL);
+		return MAPPER.convertValue(source, UserDTO.class);
 	}
 
 }

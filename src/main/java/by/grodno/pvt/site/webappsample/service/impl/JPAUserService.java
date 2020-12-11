@@ -57,7 +57,7 @@ public class JPAUserService implements UserService, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		OldUser oldUser = new OldUser(null, "Maxim", "Naumovich", null, null, true);
+		OldUser oldUser = new OldUser(null, "Maxim", "Naumovich", null, "a;slfjghhzbzygh", true);
 		OldUser oldUser2 = new OldUser(null, "Sasha", "Siaroga", null, null, true);
 		OldUser oldUser3 = new OldUser(null, "Siaroga", "Sasha", null, null, true);
 		repo.save(oldUser);

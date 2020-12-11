@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.resource.HttpResource;
 
@@ -64,6 +65,13 @@ public class UsersController {
 				IOUtils.copy(is, response.getOutputStream());
 			}
 		}
+	}
+
+	@GetMapping("/apis/v1/users")
+	@ResponseBody
+	public List<UserDTO> getAllUsers() {
+		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
+				.collect(Collectors.toList());
 	}
 
 }
