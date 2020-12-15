@@ -28,6 +28,12 @@ public class OldUser {
 
 	private String lastName;
 
+	
+	private String username;
+	private String password;
+	private String role;
+	
+	
 	private Date birthdate;
 
 	private String avatarFileName;

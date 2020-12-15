@@ -1,6 +1,7 @@
 package by.grodno.pvt.site.webappsample.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 
@@ -24,4 +25,5 @@ public interface UserService {
 
 	List<OldUser> findByFName(String fname);
 
+	Optional<OldUser> findByUserName(String userName);
 }
