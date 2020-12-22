@@ -7,13 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-
+<th:block th:insert="fragments/header.html :: css" /> 
 
 <body>
+
+    <th:block th:insert="fragments/navBar.html :: navBar" /> 
+
 	<div th:if="${param.error}">Something went wrong</div>
 	<form th:action="@{/register/new}" method="post">
 		<div>
@@ -37,6 +36,9 @@
 		</div>
 	</form>
 	<a th:href="@{/register}">Register new user</a>
+	
 
+
+	<th:block th:insert="fragments/scripts.html :: js" /> 
 </body>
 </html>
