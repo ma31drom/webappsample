@@ -48,7 +48,7 @@ public class JPAUserService implements UserService, InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		User oldUser = new User(null, "Maxim", "Naumovich", "max@max.max", null, UserRole.ADMIN, null, new Date());
-		UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
+		UserCredentials userCredentials = new UserCredentials(null,  new Date(), true, "max");
 		oldUser.setCredentials(Collections.singletonList(userCredentials));
 		repo.save(oldUser);
 	}
@@ -62,14 +62,6 @@ public class JPAUserService implements UserService, InitializingBean {
 	public void saveUser(User user) {
 		repo.save(user);
 		emailService.sendUserActivationEmail(user);
-	}
-
-	public void saveUserTest(User user) {
-		repo.save(user);
-	}
-
-	public void updateUserName(User user) {
-		repo.updateUserName(user.getFirstName(), user.getId());
 	}
 
 	@Override
