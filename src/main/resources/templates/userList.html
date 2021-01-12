@@ -24,11 +24,11 @@
 			<div class="border col-lg-1">Image</div>
 			<div class="border col-lg-1">Id</div>
 			<div class="border col-lg-2">
-			<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}">Firstname</a>
+				<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}">Firstname</a>
 			</div>
 			<div class="border col-lg-2">Lastname</div>
-			<div class="border col-lg-1">Male</div>
-			<div class="border col-lg-5" sec:authorize="hasRole('ROLE_ADMIN')">Upload
+			<div class="border col-lg-2" sec:authorize="hasRole('ROLE_ADMIN')">Edit</div>
+			<div class="border col-lg-4" sec:authorize="hasRole('ROLE_ADMIN')">Upload
 				img</div>
 		</div>
 
@@ -40,8 +40,13 @@
 			<div class="border col-lg-1" th:text="${user.id}"></div>
 			<div class="border col-lg-2" th:text="${user.firstName}"></div>
 			<div class="border col-lg-2" th:text="${user.lastName}"></div>
-			<div class="border col-lg-1" th:text="${user.male}"></div>
-			<div class="border col-lg-5" sec:authorize="hasRole('ROLE_ADMIN')">
+
+			<div class="border col-lg-2">
+				<a class="btn btn-link"
+					th:href="@{/users/edit/{uid}(uid=${user.id})}">Edit</a>
+			</div>
+
+			<div class="border col-lg-4" sec:authorize="hasRole('ROLE_ADMIN')">
 				<form method="POST" enctype="multipart/form-data"
 					th:action="@{/users/{uid}/img(uid=${user.id})}">
 					<div class="custom-file">
@@ -56,13 +61,13 @@
 			</div>
 		</div>
 		<div class="row p-2">
-			Choose page:
-			<span th:each="i: ${#numbers.sequence(1,totalPages)}"> 
-			
-			<a class="p-2"  th:if="${currentPage + 1 != i}" th:href="@{'/users'+'?pn='+${i}}">[[${i}]]</a>
-			<span class="p-2 " th:unless="${currentPage + 1 != i}">[[${i}]]</span>
-		
-			</span> 
+			Choose page: <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+
+				<a class="p-2" th:if="${currentPage + 1 != i}"
+				th:href="@{'/users'+'?pn='+${i}}">[[${i}]]</a> <span class="p-2 "
+				th:unless="${currentPage + 1 != i}">[[${i}]]</span>
+
+			</span>
 
 		</div>
 	</div>

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
 
 import by.grodno.pvt.site.webappsample.domain.User;
+import by.grodno.pvt.site.webappsample.dto.UserDTO;
 
 public interface UserService {
 
@@ -25,4 +26,11 @@ public interface UserService {
 	void activateUser(Integer id);
 
 	Page<User> getUsersPage(Integer pageNum, Integer size, String fieldName, Direction direction);
+
+	/**
+	 * Updates FirstName and LastName only.
+	 * 
+	 * @param userDTO
+	 */
+	void edit(UserDTO userDTO);
 }

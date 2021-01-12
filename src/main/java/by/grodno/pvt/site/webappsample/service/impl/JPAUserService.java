@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.domain.UserCredentials;
 import by.grodno.pvt.site.webappsample.domain.UserRole;
+import by.grodno.pvt.site.webappsample.dto.UserDTO;
 import by.grodno.pvt.site.webappsample.exception.UserNotFoundException;
 import by.grodno.pvt.site.webappsample.repo.UserCredentialsRepo;
 import by.grodno.pvt.site.webappsample.repo.UserRepo;
@@ -82,7 +83,7 @@ public class JPAUserService implements UserService, InitializingBean {
 	@Override
 	public void saveUser(User user) {
 		repo.save(user);
-		//emailService.sendUserActivationEmail(user);
+		// emailService.sendUserActivationEmail(user);
 	}
 
 	@Override
@@ -115,6 +116,14 @@ public class JPAUserService implements UserService, InitializingBean {
 		}
 
 		return repo.findAll(pagable);
+	}
+
+	@Override
+	public void edit(UserDTO userDTO) {
+		User findById = repo.findById(userDTO.getId()).orElseThrow(() -> new UserNotFoundException());
+		findById.setFirstName(userDTO.getFirstName());
+		findById.setLastName(userDTO.getLastName());
+		repo.save(findById);
 	}
 
 }

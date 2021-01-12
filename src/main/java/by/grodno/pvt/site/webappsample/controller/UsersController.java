@@ -6,14 +6,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +51,7 @@ public class UsersController {
 		} else {
 			pageNum -= 1;
 		}
-		
+
 		Page<User> usersPage = userService.getUsersPage(pageNum, SIZE, sortField, sortDirection);
 
 		List<UserDTO> users = usersPage.get().map(u -> convertionService.convert(u, UserDTO.class))
@@ -60,7 +63,7 @@ public class UsersController {
 
 		model.addAttribute("fieldName", sortField);
 		model.addAttribute("sort", sortDirection);
-		
+
 		return "userList";
 	}
 
@@ -87,6 +90,33 @@ public class UsersController {
 	public List<UserDTO> getAllUsers() {
 		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
 				.collect(Collectors.toList());
+	}
+
+	@GetMapping("/users/edit/{id}")
+	@PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
+	public String editUserForm(@PathVariable Integer id, Model model) {
+
+		model.addAttribute("user", userService.getUser(id));
+
+		return "editUserView";
+	}
+
+	@PostMapping("/users/edit/{id}")
+	public String editUser(@PathVariable Integer id, @Valid UserDTO userDTO, BindingResult br, Model model) {
+
+		if (br.hasErrors()) {
+			model.addAttribute("userDTO", userDTO);
+			return "editUserView";
+		}
+
+		User user = new User();
+		user.setId(id);
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+
+		userService.edit(userDTO);
+
+		return "redirect:/users";
 	}
 
 }
