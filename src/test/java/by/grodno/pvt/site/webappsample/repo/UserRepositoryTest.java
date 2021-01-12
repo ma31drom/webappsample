@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample;
+package by.grodno.pvt.site.webappsample.repo;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
