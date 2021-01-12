@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.dto.Avatar;
 import by.grodno.pvt.site.webappsample.dto.UserDTO;
 import by.grodno.pvt.site.webappsample.service.StorageService;
@@ -25,6 +29,8 @@ import by.grodno.pvt.site.webappsample.service.UserService;
 
 @Controller
 public class UsersController {
+
+	static public final Integer SIZE = 5;
 
 	@Autowired
 	private UserService userService;
@@ -34,13 +40,27 @@ public class UsersController {
 	private ConversionService convertionService;
 
 	@GetMapping("/users")
-	public String getAllUsers(Model model) {
+	public String getAllUsers(@RequestParam(required = false, name = "pn") Integer pageNum,
+			@RequestParam(required = false, name = "sort") Sort.Direction sortDirection,
+			@RequestParam(required = false, name = "fieldName") String sortField, Model model) {
+		if (pageNum == null) {
+			pageNum = Integer.valueOf(0);
+		} else {
+			pageNum -= 1;
+		}
+		
+		Page<User> usersPage = userService.getUsersPage(pageNum, SIZE, sortField, sortDirection);
 
-		List<UserDTO> users = userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
+		List<UserDTO> users = usersPage.get().map(u -> convertionService.convert(u, UserDTO.class))
 				.collect(Collectors.toList());
 
 		model.addAttribute("users", users);
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", usersPage.getTotalPages());
 
+		model.addAttribute("fieldName", sortField);
+		model.addAttribute("sort", sortDirection);
+		
 		return "userList";
 	}
 

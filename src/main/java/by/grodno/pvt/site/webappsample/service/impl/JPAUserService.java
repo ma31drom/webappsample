@@ -7,6 +7,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,10 +51,27 @@ public class JPAUserService implements UserService, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		User oldUser = new User(null, "Maxim", "Naumovich", "max@max.max", null, UserRole.ADMIN, null, new Date());
-		UserCredentials userCredentials = new UserCredentials(null,  new Date(), true, "max");
+		repo.save(getUser("max@max.max", "Maxim"));
+		repo.save(getUser("max1@max.max", "Naxim"));
+		repo.save(getUser("max2@max.max", "Baxim"));
+		repo.save(getUser("max3@max.max", "Eaxim"));
+		repo.save(getUser("max4@max.max", "IMaxim"));
+		repo.save(getUser("max5@max.max", "Maxim"));
+		repo.save(getUser("ma6@max.max", "Saxim"));
+		repo.save(getUser("max7@max.max", "Oaxim"));
+		repo.save(getUser("max8@max.max", "Maxim"));
+		repo.save(getUser("max9@max.max", "Waxim"));
+		repo.save(getUser("max0@max.max", "Maxim"));
+		repo.save(getUser("max12@max.max", "Aaxim"));
+		repo.save(getUser("max13@max.max", "Maxim"));
+		repo.save(getUser("max14@max.max", "Vaxim"));
+	}
+
+	private User getUser(String email, String firstName) {
+		User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, new Date());
+		UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
 		oldUser.setCredentials(Collections.singletonList(userCredentials));
-		repo.save(oldUser);
+		return oldUser;
 	}
 
 	@Override
@@ -61,7 +82,7 @@ public class JPAUserService implements UserService, InitializingBean {
 	@Override
 	public void saveUser(User user) {
 		repo.save(user);
-		emailService.sendUserActivationEmail(user);
+		//emailService.sendUserActivationEmail(user);
 	}
 
 	@Override
@@ -80,6 +101,20 @@ public class JPAUserService implements UserService, InitializingBean {
 			return user;
 		}).orElseThrow(() -> new UserNotFoundException());
 
+	}
+
+	@Override
+	public Page<User> getUsersPage(Integer pageNum, Integer size, String fieldName, Sort.Direction direction) {
+		Pageable pagable;
+		if (fieldName != null) {
+			if (direction == null)
+				direction = Sort.Direction.ASC;
+			pagable = PageRequest.of(pageNum, size, direction, fieldName);
+		} else {
+			pagable = PageRequest.of(pageNum, size);
+		}
+
+		return repo.findAll(pagable);
 	}
 
 }

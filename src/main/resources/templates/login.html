@@ -7,32 +7,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
-<th:block th:insert="fragments/header.html :: css" /> 
+<th:block th:insert="fragments/header.html :: css" />
 
 <body>
 
-    <th:block th:insert="fragments/navBar.html :: navBar" /> 
+	<th:block th:insert="fragments/navBar.html :: navBar" />
+	<div class="container">
+		<div class="row justify-content-center p-2" th:if="${param.error}">Invalid
+			username and password.</div>
+		<div class="row justify-content-center p-2" th:if="${param.logout}">You
+			have been logged out.</div>
+		<form th:action="@{/login}" method="post">
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm p-1" style="text-align: right">User Name :</div>
+				<div class="col-sm p-1">
+					<input type="text" name="username" />
+				</div>
+			</div>
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm  p-1 justify-content-end"
+					style="text-align: right">Password:</div>
+				<div class="col-sm  p-1">
+					<input type="password" name="password" />
+				</div>
+			</div>
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm  p-1" style="text-align: right" >
+				<input class="btn btn-primary" type="submit" value="Sign In" /> 
+				</div>
+				<div class="col-sm  p-1">
+				<a class="btn btn-secondary" th:href="@{/register}">Register
+					new user</a>
+					</div>
+			</div>
+		</form>
+	</div>
 
-	<div th:if="${param.error}">Invalid username and password.</div>
-	<div th:if="${param.logout}">You have been logged out.</div>
-	<form th:action="@{/login}" method="post">
-		<div>
-			<label> User Name : <input type="text" name="username" />
-			</label>
-		</div>
-		<div>
-			<label> Password: <input type="password" name="password" />
-			</label>
-		</div>
-		<div>
-			<input type="submit" value="Sign In" />
-		</div>
-	</form>
-	<a th:href="@{/register}" >Register new user</a>
-	
-	
-	 <th:block th:insert="fragments/scripts.html :: js" /> 
-   
+
+	<th:block th:insert="fragments/scripts.html :: js" />
+
 </body>
 
 
