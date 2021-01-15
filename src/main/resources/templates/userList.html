@@ -27,7 +27,8 @@
 				<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}">Firstname</a>
 			</div>
 			<div class="border col-lg-2">Lastname</div>
-			<div class="border col-lg-2" sec:authorize="hasRole('ROLE_ADMIN')">Edit</div>
+			<div class="border col-lg-1" sec:authorize="hasRole('ROLE_ADMIN')">Edit</div>
+			<div class="border col-lg-1">Buy user</div>
 			<div class="border col-lg-4" sec:authorize="hasRole('ROLE_ADMIN')">Upload
 				img</div>
 		</div>
@@ -41,11 +42,14 @@
 			<div class="border col-lg-2" th:text="${user.firstName}"></div>
 			<div class="border col-lg-2" th:text="${user.lastName}"></div>
 
-			<div class="border col-lg-2">
+			<div class="border col-lg-1">
 				<a class="btn btn-link"
 					th:href="@{/users/edit/{uid}(uid=${user.id})}">Edit</a>
 			</div>
-
+		<div class="border col-lg-1">
+				<a class="btn btn-link"
+					th:href="@{/users/buy/{uid}(uid=${user.id})}">Buy</a>
+			</div>
 			<div class="border col-lg-4" sec:authorize="hasRole('ROLE_ADMIN')">
 				<form method="POST" enctype="multipart/form-data"
 					th:action="@{/users/{uid}/img(uid=${user.id})}">

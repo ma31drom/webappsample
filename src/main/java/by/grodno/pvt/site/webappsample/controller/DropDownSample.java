@@ -15,6 +15,7 @@ public class DropDownSample {
 	@GetMapping("/dropdown")
 	public String dropdown(Model model) {
 		model.addAttribute("currentRole", UserRole.TEACHER);
+		model.addAttribute("values", UserRole.values());
 		return "dropdownSample";
 	}
 

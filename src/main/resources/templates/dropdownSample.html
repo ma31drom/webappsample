@@ -16,7 +16,7 @@
 	<form th:action="@{/dropdown}" method="post">
 		<select name="role">
 			<option
-				th:each="role : ${T(by.grodno.pvt.site.webappsample.domain.UserRole).values()}"
+				th:each="role : ${values}"
 				th:value="${role}" th:text="${role}" th:if="${role != currentRole}">
 			</option>
 		</select> <br /> <br />
