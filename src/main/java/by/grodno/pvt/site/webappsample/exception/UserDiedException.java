@@ -1,6 +1,6 @@
 package by.grodno.pvt.site.webappsample.exception;
 
-public class UserNotFoundException extends RuntimeException {
+public class UserDiedException extends RuntimeException {
 
 	private String userId;
 

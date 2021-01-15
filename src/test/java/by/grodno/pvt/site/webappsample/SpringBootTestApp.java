@@ -34,8 +34,8 @@ public class SpringBootTestApp {
 
 		mvc.perform(get("/login"))
 			.andDo(print())
-			.andExpect(status().isOk());
-			//.andExpect(content().string(containsString("Sing In")));
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString("Sign In")));
 
 	}
 
