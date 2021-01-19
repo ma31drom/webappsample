@@ -53,10 +53,10 @@
 			<div class="border col-lg-4" sec:authorize="hasRole('ROLE_ADMIN')">
 				<form method="POST" enctype="multipart/form-data"
 					th:action="@{/users/{uid}/img(uid=${user.id})}">
-					<!-- <div class="custom-file">    class="custom-file-input" class="custom-file-label"--><div>
+					<!-- <div class="custom-file">    class="custom-file-input" class="custom-file-label"--><div class="custom-file">
 						<div class="col-lg-7 p-2">
-							<input type="file" name="file"
-								id="inputGroupFile03"> <label 
+							<input class="custom-file-input" type="file" name="file"
+								id="inputGroupFile03"> <label class="custom-file-label"
 								for="inputGroupFile03">Choose file</label>
 						</div>
 						<input type="submit" value="Upload" />
@@ -64,6 +64,9 @@
 				</form>
 			</div>
 		</div>
+		
+		
+		
 		<div class="row p-2">
 			Choose page: <span th:each="i: ${#numbers.sequence(1,totalPages)}">
 
@@ -81,6 +84,13 @@
 
 
 	<th:block th:insert="fragments/scripts.html :: js" />
-
+	<script>
+            $('#inputGroupFile03').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
 </body>
 </html>
