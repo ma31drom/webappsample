@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Getting Started: Serving Web Content</title>
+<title th:text="#{label.getting.started}">Getting Started: Serving Web Content ORIGINAL</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
@@ -24,9 +24,9 @@
 			<div class="border col-lg-1">Image</div>
 			<div class="border col-lg-1">Id</div>
 			<div class="border col-lg-2">
-				<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}">Firstname</a>
+				<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}" th:text="#{label.firstname}">Firstname  ORIGINAL</a>
 			</div>
-			<div class="border col-lg-2">Lastname</div>
+			<div class="border col-lg-2" th:text="#{label.lastname}">Lastname  ORIGINAL</div>
 			<div class="border col-lg-1" sec:authorize="hasRole('ROLE_ADMIN')">Edit</div>
 			<div class="border col-lg-1">Buy user</div>
 			<div class="border col-lg-4" sec:authorize="hasRole('ROLE_ADMIN')">Upload
