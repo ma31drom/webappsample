@@ -52,4 +52,9 @@ public class User {
 	private UserPicture picture;
 
 	private Date birthdate;
+	
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	private List<CarRent> carRents;
+	
 }

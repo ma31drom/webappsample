@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import by.grodno.pvt.site.webappsample.domain.UserCredentials;
+import by.grodno.pvt.site.webappsample.domain.UserWIthId;
 import by.grodno.pvt.site.webappsample.exception.UserNotFoundException;
 import by.grodno.pvt.site.webappsample.service.UserService;
 
@@ -31,7 +32,7 @@ public class UserAuthService implements UserDetailsService {
 					.findAny();
 			String password = findAny.map(UserCredentials::getPassword).orElseThrow(() -> new UserNotFoundException());
 
-			return new User(userFromBd.getEmail(), password, toAuthorities(userFromBd));
+			return new UserWIthId(userFromBd.getId(), userFromBd.getEmail(), password, toAuthorities(userFromBd));
 		}).orElse(null);
 	}
 

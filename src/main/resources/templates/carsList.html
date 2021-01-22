@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title th:text="#{label.getting.started}">Getting Started:
+	Serving Web Content ORIGINAL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<th:block th:insert="fragments/header.html :: css" />
+
+<body style="background-image: url('/img/back.jpg');">
+
+	<th:block th:insert="fragments/navBar.html :: navBar" />
+
+
+	<div class="row justify-content-center p-3">
+		<p>
+			Hello, <span sec:authentication="principal.username">Udefined</span>!
+		</p>
+	</div>
+
+	<div class="container" style="background-color: white;">
+		<div class="row">
+			<div class="border col-lg-1">Id</div>
+			<div class="border col-lg-3">CarName</div>
+			<div class="border col-lg-8">Actions</div>
+		</div>
+
+		<div class="row" th:each="car : ${cars}">
+			<div class="border col-lg-1" th:text="${car.id}"></div>
+			<div class="border col-lg-3" th:text="${car.name}"></div>
+
+			<div class="border col-lg-8">
+				<a class="btn btn-link" th:href="@{/cars/rent/{uid}(uid=${car.id})}">Rent
+					for 20 sec</a>
+			</div>
+		</div>
+
+
+
+
+	</div>
+	<br />
+	<br />
+
+
+
+	<th:block th:insert="fragments/scripts.html :: js" />
+	
+</body>
+</html>

@@ -69,7 +69,7 @@ public class JPAUserService implements UserService, InitializingBean {
 	}
 
 	private User getUser(String email, String firstName) {
-		User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, new Date());
+		User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, new Date(), null);
 		UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
 		oldUser.setCredentials(Collections.singletonList(userCredentials));
 		return oldUser;
