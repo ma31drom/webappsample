@@ -7,21 +7,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import by.grodno.pvt.site.webappsample.domain.UserRole;
+import by.grodno.pvt.site.webappsample.dto.DropDownDTO;
 import by.grodno.pvt.site.webappsample.repo.UserRepo;
 
 @Controller
-public class DropDownSample {
+public class MultiDropDownSample {
 
-	@GetMapping("/dropdown")
+	@GetMapping("/dropdown/multi")
 	public String dropdown(Model model) {
-		model.addAttribute("currentRole", UserRole.TEACHER);
+		
 		model.addAttribute("values", UserRole.values());
 		
-		return "dropdownSample";
+		model.addAttribute("dto", new DropDownDTO());
+		
+		return "dropdownMultiSample";
 	}
 
-	@PostMapping("/dropdown")
-	public String index(@RequestParam UserRole role) {
+	@PostMapping("/dropdown/multi")
+	public String index(DropDownDTO dto) {
 		System.out.println();
 		return "redirect:/users";
 	}
