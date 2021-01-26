@@ -26,7 +26,7 @@ import by.grodno.pvt.site.webappsample.service.UserService;
 
 @Service
 @Transactional
-public class JPAUserService implements UserService, InitializingBean {
+public class JPAUserService implements UserService {
 
 	@Autowired
 	private UserRepo repo;
@@ -49,7 +49,7 @@ public class JPAUserService implements UserService, InitializingBean {
 	public void deleteUser(Integer number) {
 		repo.deleteById(number);
 	}
-
+/*
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		repo.save(getUser("max@max.max", "Maxim"));
@@ -74,7 +74,7 @@ public class JPAUserService implements UserService, InitializingBean {
 		oldUser.setCredentials(Collections.singletonList(userCredentials));
 		return oldUser;
 	}
-
+*/
 	@Override
 	public User getUser(Integer id) {
 		return repo.getOne(id);

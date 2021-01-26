@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CarRentService implements InitializingBean {
+public class CarRentService {
 
 	
 	private final CarRentRepo carRentRepo;
@@ -54,11 +54,11 @@ public class CarRentService implements InitializingBean {
 		carRepo.saveAll(busy);
 	}
 
-	@Override
+	/*@Override
 	public void afterPropertiesSet() throws Exception {
 		carRepo.save(new Car(null, "ВАЗ", true, null));
 		carRepo.save(new Car(null, "Москвич", true, null));
 		carRepo.save(new Car(null, "ЗАЗ", true, null));
-	}
+	}*/
 
 }

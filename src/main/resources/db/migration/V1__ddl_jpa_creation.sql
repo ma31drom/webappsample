@@ -1,0 +1,14 @@
+create sequence hibernate_sequence start 1 increment 1;
+create table car (id int4 not null, free boolean, name varchar(255), primary key (id));
+create table car_rent (id int4 not null, free boolean not null, rent_end_time timestamp, rent_start_time timestamp, car_id int4, user_id int4, primary key (id));
+create table user_table (id int4 not null, birthdate timestamp, email varchar(255), first_name varchar(255), last_name varchar(255), role int4, primary key (id));
+create table user_table_credentials (u1 int4 not null, u2 int4 not null);
+create table user_credentials (id int4 not null, active boolean, creation_date timestamp, password varchar(255), primary key (id));
+create table user_picture (id int4 not null, file_location varchar(255), file_name varchar(255), user_id int4, primary key (id));
+alter table user_table add constraint UK_eamk4l51hm6yqb8xw37i23kb5 unique (email);
+alter table user_table_credentials add constraint UK_egrmccyhoiqke28cvok9fw3lj unique (u2);
+alter table car_rent add constraint FKcx84gd8u57g2s4drl7rpx44d3 foreign key (car_id) references car;
+alter table car_rent add constraint FK21fqfr24yg2s8dku0028w5v7m foreign key (user_id) references user_table;
+alter table user_table_credentials add constraint FKhggy7tyntdjexwh8o70oruiwh foreign key (u2) references user_credentials;
+alter table user_table_credentials add constraint FKgybv3yr51kt56e8e0i6iufigl foreign key (u1) references user_table;
+alter table user_picture add constraint FKbhkea3rh5bk0k6qo3s0ni5dey foreign key (user_id) references user_table;
