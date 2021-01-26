@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Getting Started: Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<th:block th:insert="fragments/header.html :: css" />
+
+<body>
+
+	<th:block th:insert="fragments/navBar.html :: navBar" />
+
+	<div class="row justify-content-center  p-2	">Enter user details
+		please...</div>
+
+	<form action="#" th:action="@{/cars/add}" th:object="${carsListDTO}"
+		method="post">
+		<fieldset>
+			<div th:each="car, itemStat : *{cars}">
+
+				<div class="row justify-content-center  p-1">
+					<div class="col-sm  p-1 justify-content-end"
+						style="text-align: right">
+						Name of car №
+						<th:block th:text="${itemStat.index}" />
+					</div>
+					<div class="col-sm  p-1">
+						<input type="text" th:field="*{cars[__${itemStat.index}__].name}" />
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row justify-content-center  p-1">
+				<input class="btn btn-primary" type="submit" value="Create cars" />
+			</div>
+		</fieldset>
+	</form>
+
+	<th:block th:insert="fragments/scripts.html :: js" />
+</body>
+</html>

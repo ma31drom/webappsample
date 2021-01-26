@@ -28,6 +28,8 @@ public class CarRent {
 	private Date rentStartTime;
 	private Date rentEndTime;
 
+	private boolean free = true;
+
 	@ManyToOne
 	@JoinColumn(name = "car_id")
 	private Car car;
